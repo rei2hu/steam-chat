@@ -1,12 +1,18 @@
 const { PersonaState } = require('./res/enums.json');
 
 class Friend {
-	constructor(friends, id, personaState = {}) {
+	constructor(friends, id, personaState = {}, chatWindow) {
 		this.steamFriends = friends;
-		this.id = id;;
+		this.id = id;
+		this.chatWindow = chatWindow;
+		this.setInfo(personaState);
+	}
+
+	setInfo(personaState = {}) {
 		this.state = PersonaState[personaState.persona_state] || 'OFFLINE';
 		this.name = personaState.player_name || 'UNKNOWN NAME';
 		this.gameName = personaState.game_name || 'NOT PLAYING';
+		this.chatWindow.setInfo(this);
 	}
 
 	send(message) {

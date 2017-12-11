@@ -3,10 +3,11 @@ const { SteamFriends } = require('steam');
 const { ChatEntryType } = require('./res/enums.json');
 
 class Friends {
-	constructor(client) {
+	constructor(client, manager) {
 		this.steamFriends = new SteamFriends(client);
 		this.friends = new Map();
 		this.mostRecent;
+		this.manager = manager;
 		this.steamFriends.on('relationships', this.createFriends.bind(this));
 		this.steamFriends.on('friendMsg', this.handleFriendMsg.bind(this));
 		this.steamFriends.on('personaState', this.createFriends.bind(this));
@@ -33,13 +34,17 @@ class Friends {
 			if (this.friends.has(id)) {
 				name = this.friends.get(id).name;
 			}
-			console.log(name + ": " + msg);
+			this.manager.appendText(name + ": " + msg, false);
 		}
 	}
 
 	createFriend(id) {
-		const friend = new Friend(this.steamFriends, id, this.steamFriends.personaStates[id]);
-		this.friends.set(id, friend);
+		const persona = this.steamFriends.personaStates[id];
+		if (!this.friends.has(id)) {
+			this.friends.set(id, new Friend(this.steamFriends, id, persona, this.manager.createWindow()));
+		} else {
+			this.friends.get(id).setInfo(persona);
+		}
 	}
 
 	get(idOrName) {
