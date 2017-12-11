@@ -1,3 +1,4 @@
 login.sentry
 auth.json
 node_modules
+*.swp
