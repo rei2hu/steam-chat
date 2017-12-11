@@ -1,0 +1,28 @@
+{
+  "name": "steam-chat",
+  "version": "0.0.1",
+  "description": "Steam chat for command line",
+  "main": "index.js",
+  "dependencies": {
+    "steam": "^1.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rei2hu/steam-chat.git"
+  },
+  "keywords": [
+    "steam",
+    "steam-chat",
+    "chat"
+  ],
+  "author": "rei2hu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rei2hu/steam-chat/issues"
+  },
+  "homepage": "https://github.com/rei2hu/steam-chat#readme"
+}

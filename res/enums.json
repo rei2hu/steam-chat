@@ -1,0 +1,53 @@
+{
+	"__reference1": "https://github.com/seishun/node-steam/search?utf8=%E2%9C%93&q=EChatEntryType&type=",
+	"__reference2": "https://github.com/SteamRE/SteamKit/blob/master/Resources/SteamLanguage/eresult.steamd",
+	"ChatEntryType": [
+		"INVALID",
+		"CHAT_MSG",
+		"TYPING",
+		"INVITE",
+		"EMOTE",
+		"LOBBY_GAME_START",
+		"CLOSED WINDOW",
+		"OPENED WINDOW",
+		"KICKED",
+		"BANNED",
+		"DISCONNECTED",
+		"HISTORICAL_CHAT",
+		"RESERVED1",
+		"RESERVED2",
+		"LINK_BLOCKED"
+	],
+	"PersonaState": [
+		"OFFLINE",
+		"ONLINE",
+		"BUSY",
+		"AWAY",
+		"SNOOZE",
+		"LOOKING TO TRADE",
+		"LOOKING TO PLAY"
+	],
+	"LoginState": {
+		"0": "INVALID",
+		"1": "OK",
+		"2": "FAIL",
+		"3": "NO CONNECTION",
+		"5": "INVALID PASSWORD",
+		"6": "LOGGED IN ELSEWHERE",
+		"7": "INVALID PROTOCOL VERSION",
+		"18": "ACCOUNT NOT FOUND",
+		"20": "SERVICE UNAVAILABLE",
+		"25": "LOGIN ATTEMPTS EXCEEDED",
+		"35": "CONNECTION FAILED",
+		"36": "HANDSHAKE FAILED",
+		"37": "IO FAILURE",
+		"79": "UNEXPECTED ERROR",
+		"43": "ACCOUNT DISABLED",
+		"56": "PASSWORD UNSET",
+		"63": "STEAM GUARD, CHECK EMAIL",
+		"73": "ACCOUNT IS LOCKED",
+		"74": "ACCOUNT LOCKED, CHECK EMAIL",
+		"88": "INCORRECT TWO FACTOR CODE",
+		"89": "INCORRECT TWO FACTOR CODE"
+	}
+}
