@@ -7,11 +7,19 @@ begin to draw the UI properly.
 
 ![sample image](https://i.imgur.com/3T0EWdY.png)
 
+### Features
+- Chat with your online friends
+- Gives unread message count
+
 ### Known Issues
 - Unicode breaks the alignment
 - Too many friends online will also break the alignment (probably)
 - If the screen is redrawn (any update) while typing, you lose sight of your current input
 
 ### Not tested yet
-- If the unread number of messages changes when you get a new message
 - Friends removing you and stuff
+
+### Planned
+- Refactoring the ugly draw UI code
+- Saving chat history
+- Custom input handling
