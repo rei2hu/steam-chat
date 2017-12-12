@@ -12,20 +12,14 @@ class ChatWindow {
 		this.id = info.id;
 	}
 
-	sendText(text) {
-		this.appendText(text, true);
-		if (this.friend) {
-			this.friend.send(text);
-		}
-	}
-
 	appendText(text, me) {
 		let date = new Date();
-		let time = `[${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}:${('0' + date.getSeconds()).slice(-2)}]`;
+		let time = `[${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}:${('0' + date.getSeconds()).slice(-2)}] `;
 		if (!me) {
 			this.lines.push(time + text);
 		} else {
 			this.lines.push(time + '[ME]: ' + text);
+			this.friend.send(text);
 		}
 		if (this.lines.length > process.stdout.rows - 12) {
 			this.lines.shift();

@@ -28,7 +28,6 @@ class Friends {
 	}
 
 	handleFriendMsg(id, msg, type) {
-		console.log('recieved message ' + type)
 		this.mostRecent = id;
 		if (ChatEntryType[type] === 'CHAT_MSG') {
 			let name = 'UNKNOWN NAME';

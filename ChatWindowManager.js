@@ -23,7 +23,7 @@ class ChatWindowManager {
 		}
 		const [command, ...args] = line.split(' ');
 		if (command === 'm') {
-			this.sendText(args.join(' '), true);
+			this.appendText(args.join(' '), true);
 		} else if (command === '>') {
 			this.switchTab(this.active + 1);
 		} else if (command === '<') {
@@ -40,8 +40,8 @@ class ChatWindowManager {
 		process.stdout.write('  > ');
 	}
 
-	sendText(text, me = false) {
-		this.windows[this.active].sendText(text);
+	appendText(text, me = false) {
+		this.windows[this.active].appendText(text, me);
 	}
 
 	createWindow() {
