@@ -10,16 +10,25 @@ class ChatWindow {
 		this.friend = info;
 		this.name = info.name;
 		this.id = info.id;
-		this.manager.redraw();
+	}
+
+	sendText(text) {
+		this.appendText(text, true);
+		if (this.friend) {
+			this.friend.send(text);
+		}
 	}
 
 	appendText(text, me) {
-		let time = '[time here] ';
+		let date = new Date();
+		let time = `[${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}:${('0' + date.getSeconds()).slice(-2)}]`;
 		if (!me) {
 			this.lines.push(time + text);
 		} else {
-			this.friend.send(text);
 			this.lines.push(time + '[ME]: ' + text);
+		}
+		if (this.lines.length > process.stdout.rows - 12) {
+			this.lines.shift();
 		}
 		if (this.manager.active !== this.index) {
 			this.unreadMessages++;
@@ -28,11 +37,11 @@ class ChatWindow {
 	}
 
 	draw() {
-		let linesToPrint = this.lines.length - process.stdout.rows + 2;
-		linesToPrint = Math.max(linesToPrint, 0);
-		for (let i = linesToPrint; i < this.lines.length; i++) {
-			console.log(this.lines[i]);
+		let str = [];
+		for (let i = 0; i < process.stdout.rows - 12; i++) {
+			str.push(this.lines[i] || '');
 		}
+		return str;
 	}
 
 	readMessages() {

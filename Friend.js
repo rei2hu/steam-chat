@@ -20,7 +20,7 @@ class Friend {
 	}
 
 	displayName() {
-		return `[${this.id}] ${this.name} (${this.state})\n   ${this.gameName === 'NOT PLAYING' ? '' : 'playing ' + this.gameName}`
+		return `[${this.id}] ${this.name} (${this.state})${this.gameName === 'NOT PLAYING' ? '' : ' playing ' + this.gameName}`
 	}
 
 	name() {

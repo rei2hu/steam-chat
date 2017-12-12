@@ -23,6 +23,7 @@ class Friends {
 			for (const friendId in this.steamFriends.friends) {
 				this.createFriend(friendId);
 			}
+			this.manager.redraw();
 		}, 5000);
 	}
 
