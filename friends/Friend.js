@@ -1,4 +1,4 @@
-const { PersonaState } = require('./res/enums.json');
+const { PersonaState } = require('../res/enums.json');
 
 class Friend {
 	constructor(friends, id, personaState = {}, chatWindow) {
@@ -16,7 +16,7 @@ class Friend {
 	}
 
 	send(message) {
-		this.steamFriends.sendMessage(this.id, message);
+		// this.steamFriends.sendMessage(this.id, message);
 	}
 
 	displayName() {

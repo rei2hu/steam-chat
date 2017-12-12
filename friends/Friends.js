@@ -1,6 +1,6 @@
 const Friend = require('./Friend');
 const { SteamFriends } = require('steam');
-const { ChatEntryType } = require('./res/enums.json');
+const { ChatEntryType } = require('../res/enums.json');
 
 class Friends {
 	constructor(client, manager) {
@@ -20,10 +20,11 @@ class Friends {
 	createFriends() {
 		// sht workaround hopefully
 		setTimeout(() => {
+			this.manager.sendDebug('Recieved friends update.');
 			for (const friendId in this.steamFriends.friends) {
 				this.createFriend(friendId);
 			}
-			this.manager.redraw();
+			this.manager.draw();
 		}, 5000);
 	}
 

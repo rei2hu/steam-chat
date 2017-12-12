@@ -1,10 +1,11 @@
-const { SteamClient, SteamUser } = require('steam');
-const Friends = require('./Friends');
-const ChatWindowManager = require('./ChatWindowManager');
-
 const fs = require('fs');
 const crypto = require('crypto');
 const path = require('path');
+
+const { SteamClient, SteamUser } = require('steam');
+
+const ChatWindowManager = require('./windows/ChatWindowManager');
+const Friends = require('./friends/Friends');
 const enums = require('./res/enums.json');
 
 class Account {
@@ -13,12 +14,14 @@ class Account {
 		this.steamUser = new SteamUser(this.client);
 		this.chatWindowManager = new ChatWindowManager();
 		this.friends = new Friends(this.client, this.chatWindowManager);
+
 		this.account_name = username;
 		this.password = password;
 		this.autoreconnect = options.autoreconnect;
 		this.sentryFile = path.join(options.sentryFileDir, 'login.sentry');
 		this.twofa = options.twofa;
 		this.auth = options.auth;
+
 		this.client.on('connected', this.login.bind(this));
 		this.client.on('logOnResponse', this.checkResponse.bind(this));
 		this.client.on('loggedOff', this.logoffHandle.bind(this));
@@ -43,44 +46,50 @@ class Account {
 
 	checkResponse(res) {
 		if (res.eresult == '1') {
-			console.log('Logged on ok');
+			this.printToDebug('Logged on ok');
 			this.friends.setOnline();
 		} else {
-			console.error('Error logging on:');
-			console.error('  ' + (enums.LoginState[res.eresult] || `Unknown error (${res.eresult})`));
-			this.reconnect();
+			this.printToDebug('Error logging on:');
+			this.printToDebug('  ' + (enums.LoginState[res.eresult] || `Unknown error (${res.eresult})`));
+			this.attemptReconnect();
 		}
 	}
 
-	reconnect() {
+	attemptReconnect() {
 		if (this.autoreconnect) {
-			console.log('Reconnecting in 5 seconds');
+			this.printToDebug('Reconnecting in 5 seconds');
 			setTimeout(() => this.client.connect(), 5000);
+		} else {
+			this.printToDebug('Autoreconnect not set, not reconnecting');
+			this.resourceCleanup();
 		}
 	}
 
-	logoffHandle() {
-		console.log('Logged off gracefully.');
+	resourceCleanup() {
+		this.printToDebug('Closing program, cleaning up things.');
 	}
 
 	errorHandle(err) {
-		console.error('Logged off with error.');
-		this.reconnect();
+		this.printToDebug('Recieved error.');
+		this.attemptReconnect();
+	}
+	
+	logoffHandle() {
+		this.printToDebug('Logged off.');
+		this.attemptReconnect();
 	}
 
 	sentryHandle(auth, callback) {
-		console.log('Recieved sentry file ' + auth.filename);
+		this.printToDebug('Recieved sentry file ' + auth.filename);
 		fs.writeFileSync(this.sentryFile, auth.bytes);
 		callback({
 			sha_file: crypto.createHash('sha1').update(auth.bytes).digest()
 		});
 	}
+
+	printToDebug(text, type = 0) {
+		this.chatWindowManager.sendDebug(text, type);
+	}
 }
 
 module.exports = Account;
-
-
-
-
-
-
