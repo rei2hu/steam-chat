@@ -9,7 +9,7 @@ begin to draw the UI properly.
 
 ### Features
 - Chat with your online friends
-- Gives unread message count
+- Shows unread message notifications as in there is an asterisk in the tab with unread messages.
 
 ### Known Issues
 - Unicode breaks the alignment
@@ -21,5 +21,6 @@ begin to draw the UI properly.
 
 ### Planned
 - ~~Refactoring the ugly draw UI code~~
-- Saving chat history
+- ~~Saving chat history~~
 - Custom input handling
+- Custom 'window; formatting
