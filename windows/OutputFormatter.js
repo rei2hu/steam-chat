@@ -52,7 +52,7 @@ function formatAndPrint(titleString, tabsArray, currentWindowString, innerTextAr
 		belowTabsString += ul;
 	}
 	let belowCurrentString = udr + lr.repeat(currentWindowString.length - 2) + ul;
-	innerTextArray = innerTextArray.map(e => e === '' ? ud : udr + ' ' + e);
+	innerTextArray = innerTextArray.map(e => (!e.startsWith('[') ? ud : udr) + ' ' + e);
 	let innerTextString = innerTextArray.join('\n');
 	let aboveHelpString = udr + lr.repeat(helpString.length + 2) + dl;
 	helpString = ud + ' ' + helpString + ' ' + ul;

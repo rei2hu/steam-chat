@@ -14,7 +14,14 @@ class ChatWindow {
 
 	addLine(line) {
 		let time = '[' + new Date().toISOString().match(/T(.*?)\./)[1] + ']';
-		this.lines.push(time + ' ' + line);
+		let prefix = 11;
+		let length = process.stdout.columns - 2 - prefix;
+		let regexp = new RegExp('.{1,' + length + '}', 'g');
+		let lines = line.match(regexp);
+		this.lines.push(time + ' ' + lines[0]);
+		for (let i = 1; i < lines.length; i++) {
+			this.lines.push(' '.repeat(prefix) + lines[i]);
+		}
 		if (this.manager.active !== this.index) {
 			this.unreadMessages++;
 		}
