@@ -5,7 +5,7 @@ want to chat but also don't want to use web browser steam for some reason.
 Requires at least a width of 85 characters horizontally and like 15 characters vertically to even
 begin to draw the UI properly.
 
-![sample image](https://i.imgur.com/3T0EWdY.png)
+![sample image](https://i.imgur.com/FIshw7u.png)
 
 ### Features
 - Chat with your online friends
