@@ -67,7 +67,7 @@ function formatAndPrint(titleString, tabsArray, currentWindowString, innerTextAr
 	console.log(innerTextString);
 	console.log(aboveHelpString);
 	console.log(helpString);
-	process.stdout.write(promptString + ' ');
+	process.stdout.write(promptString);
 }
 
 module.exports = formatAndPrint;

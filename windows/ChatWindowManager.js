@@ -1,47 +1,19 @@
-const readline = require('readline');
-
 const ChatWindow = require('./ChatWindow');
 const DebugWindow = require('./DebugWindow');
+const InputHandler = require('./InputHandler');
 const formatAndPrint = require('./OutputFormatter');
 
 class ChatWindowManager {
 	constructor() {
+		this.active = 0;
+		this.ready = false;
 		this.title = 'steam-chat for shell';
-		this.prompt = '>';
+		this.prompt = '> ';
 		this.helpString = 'm [msg] - send msg | >, < - change tabs | r - redraw | ctrl+c - quit';
 		this.debugWindow = new DebugWindow(this, 0)
 		this.windows = [this.debugWindow];
-		this.active = 0;
-		this.reader = readline.createInterface({
-			input: process.stdin
-		});
-		this.reader.on('line', this.defaultHandler.bind(this));
-		this.ready = false;
+		this.input = new InputHandler(this);
 		this.draw();
-	}
-
-	defaultHandler(line) {
-		if (!this.ready) {
-			console.log('Not ready yet, please wait a little')
-			return;
-		}
-		const [command, ...args] = line.split(' ');
-		if (command === 'm') {
-			this.sendText(args.join(' '));
-		} else if (command === '>') {
-			this.switchTab(this.active + 1);
-		} else if (command === '<') {
-			this.switchTab(this.active - 1);
-		} else if (command === 'r') {
-			this.draw();
-		} else {
-			this.defaultErrorResponse();
-		}
-	}
-
-	defaultErrorResponse() {
-		console.log('  < Unknown command!');
-		process.stdout.write('  > ');
 	}
 
 	sendText(text) {
@@ -69,7 +41,7 @@ class ChatWindowManager {
 
 	draw() {
 		this.ready = false;
-		formatAndPrint(this.title, this.tabs(), this.currentText(), this.innerText(), this.helpString, this.prompt);
+		formatAndPrint(this.title, this.tabs(), this.currentText(), this.innerText(), this.helpString, this.promptAndBuffer());
 		this.ready = true;
 	}
 
@@ -78,7 +50,11 @@ class ChatWindowManager {
 		for (let i = 0; i < this.windows.length; i++) {
 			const win = this.windows[i];
 			if (win.isOnline()) {
-				tabs.push(win.name.slice(0, 3) + ` (${win.unreadMessages})`);
+				if (win.index === this.active) {
+					tabs.push(win.name);
+				} else {
+					tabs.push(win.name.slice(0, 3) + (win.unreadMessages > 0 ? '*' : ''));
+				}
 			}
 		}
 		return tabs;
@@ -90,6 +66,10 @@ class ChatWindowManager {
 
 	currentText() {
 		return this.windows[this.active].getFullName();
+	}
+
+	promptAndBuffer() {
+		return this.prompt  + this.input.bufferString();
 	}
 
 	switchTab(index) {

@@ -35,7 +35,7 @@ class Friends {
 			if (this.friends.has(id)) {
 				name = this.friends.get(id).name;
 			}
-			this.friends.get(id).chatWindow.appendText(name + ": " + msg, false);
+			this.friends.get(id).chatWindow.addLine(name + ": " + msg, false);
 		}
 	}
 
