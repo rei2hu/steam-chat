@@ -14,12 +14,12 @@ begin to draw the UI properly.
 ### Known Issues
 - Unicode breaks the alignment
 - Too many friends online will also break the alignment (probably)
-- If the screen is redrawn (any update) while typing, you lose sight of your current input
+- ~~If the screen is redrawn (any update) while typing, you lose sight of your current input~~
 
 ### Not tested yet
 - Friends removing you and stuff
 
 ### Planned
-- Refactoring the ugly draw UI code
+- ~~Refactoring the ugly draw UI code~~
 - Saving chat history
 - Custom input handling
