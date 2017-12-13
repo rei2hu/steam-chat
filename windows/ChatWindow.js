@@ -31,7 +31,7 @@ class ChatWindow {
 
 	getInnerText() {
 		let windowHeight = process.stdout.rows - 9; // 9 for the tabs/current/prompt heighs/title
-		return this.lines.concat(new Array(windowHeight).fill('')).slice(0, windowHeight);
+		return this.lines.concat(new Array(Math.max(windowHeight - this.lines.length, 0)).fill('')).slice(-windowHeight);
 	}
 
 	readMessages() {
