@@ -1,19 +1,24 @@
+const FileWriterQueue = require('./FileWriterQueue');
+
 class ChatWindow {
-	constructor(manager, index) {
+	constructor(manager, index, dir) {
 		this.manager = manager;
 		this.unreadMessages = 0;
 		this.lines = [];
 		this.index = index;
+		this.dir = dir;
 	}
 	
 	setInfo(info) {
 		this.friend = info;
 		this.name = info.name;
 		this.id = info.id;
+		this.fwq = new FileWriterQueue(this.dir, this.id, this);
 	}
 
 	addLine(line) {
 		let time = '[' + new Date().toISOString().match(/T(.*?)\./)[1] + ']';
+		this.fwq.addJob(time + ' ' + line);
 		let prefix = 11;
 		let length = process.stdout.columns - 2 - prefix;
 		let regexp = new RegExp('.{1,' + length + '}', 'g');

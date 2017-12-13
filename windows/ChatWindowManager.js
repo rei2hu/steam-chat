@@ -1,19 +1,33 @@
+const path = require('path');
+const fs = require('fs');
+
 const ChatWindow = require('./ChatWindow');
 const DebugWindow = require('./DebugWindow');
 const InputHandler = require('./InputHandler');
 const formatAndPrint = require('./OutputFormatter');
 
 class ChatWindowManager {
-	constructor() {
+	constructor(promptString, helpString, logDir) {
 		this.active = 0;
 		this.ready = false;
 		this.title = 'steam-chat for shell';
-		this.prompt = '> ';
-		this.helpString = 'm [msg] - send msg | >, < - change tabs | r - redraw | ctrl+c - quit';
-		this.debugWindow = new DebugWindow(this, 0)
+		this.prompt = promptString;
+		this.helpString = helpString;
+		this.logDir = logDir;
+		this.debugWindow = new DebugWindow(this, 0, this.logDir)
 		this.windows = [this.debugWindow];
 		this.input = new InputHandler(this);
+		this.checkDirectory(path.join(this.logDir, 'x'));
 		this.draw();
+	}
+
+	checkDirectory(d) {
+		const dir = path.dirname(d);
+		if (!fs.existsSync(dir)) {
+			this.checkDirectory(dir);
+			this.sendDebug('Creating ' + dir + ' directory.');
+			fs.mkdirSync(dir);
+		}
 	}
 
 	sendText(text) {
@@ -30,11 +44,11 @@ class ChatWindowManager {
 		// 1 - warning
 		// 2 - error
 		// 3 - rekt
-		this.windows[0].addLine(text);
+		this.debugWindow.addLine(text);
 	}
 
 	createWindow() {
-		const win = new ChatWindow(this, this.windows.length);
+		const win = new ChatWindow(this, this.windows.length, this.logDir);
 		this.windows.push(win);
 		return win;
 	}

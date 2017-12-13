@@ -2,17 +2,25 @@ const fs = require('fs');
 const crypto = require('crypto');
 const path = require('path');
 
+const ChatWindowManager = require('../windows/ChatWindowManager');
+const Friends = require('../friends/Friends');
+const enums = require('../res/enums.json');
+
 const { SteamClient, SteamUser } = require('steam');
 
-const ChatWindowManager = require('./windows/ChatWindowManager');
-const Friends = require('./friends/Friends');
-const enums = require('./res/enums.json');
-
 class Account {
-	constructor(username, password, options = {autoreconnect: false, sentryFileDir: './'}) {
+	constructor(username, password, options = {
+		autoreconnect: false,
+		sentryFileDir: './',
+		auth: undefined,
+		twofa: undefined,
+		promptString: '> ',
+		helpString: 'm [msg] - send msg | >, < - change tabs | r - redraw | ctrl + c - quit',
+		logDir: './chatlogs'
+	}) {
 		this.client = new SteamClient();
 		this.steamUser = new SteamUser(this.client);
-		this.chatWindowManager = new ChatWindowManager();
+		this.chatWindowManager = new ChatWindowManager(options.promptString, options.helpString, options.logDir);
 		this.friends = new Friends(this.client, this.chatWindowManager);
 
 		this.account_name = username;
@@ -42,6 +50,7 @@ class Account {
 			two_factor_code: this.twofa,
 			sha_sentryfile: sha1,
 		});
+		this.printToDebug('Attempting to log on');
 	}
 
 	checkResponse(res) {

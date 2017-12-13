@@ -1,4 +1,3 @@
-
 class InputHandler {
 	constructor(manager) {
 		this.manager = manager;
@@ -43,7 +42,6 @@ class InputHandler {
 		}
 		// enter
 		else if (charCode === 13) {
-			this.manager.sendDebug('Entered: ' + this.bufferString().slice(0, this.trueLength));
 			this.defaultHandler();
 		}
 		process.stdout.cursorTo(this.promptLength());

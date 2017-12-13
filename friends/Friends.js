@@ -1,4 +1,5 @@
 const Friend = require('./Friend');
+
 const { SteamFriends } = require('steam');
 const { ChatEntryType } = require('../res/enums.json');
 
