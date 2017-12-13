@@ -1,9 +1,9 @@
-const Account = require('./account/Account');
+const SteamChat = require('./lib/index');
 const { username, password, auth } = require('./auth.json');
 
 // hopefully this weird ass indentation
 // doesn't trigger anyone
-const acc = new Account(username, password, 
+const sc = new SteamChat(username, password,
 	{
 	// account options
 		// reconnect on disconnects?
@@ -17,9 +17,9 @@ const acc = new Account(username, password,
 
 	// chat window manager options
 		// the prompt
-		promptString: 'xD text here!: ',
+		promptString: '> ',
 		// the help message, for now use default because it corresponds with default handler
-		helpString: 'muh useless help message',
+		helpString: 'm [msg] - send msg | >, < - change tabs | r - redraw | ctrl + c - quit',
 		// directory to store chat logs
 		logDir: './chatlogs'
 
