@@ -1,12 +1,9 @@
-const readline = require('readline');
 
 class InputHandler {
 	constructor(manager) {
 		this.manager = manager;
-		this.inputLine = readline.createInterface({ input: process.stdin });
 		process.stdin.setRawMode(true);
 		process.stdin.on('data', this.handleKeyPress.bind(this));
-		this.inputLine.on('line', this.defaultHandler.bind(this));
 		this.resetBuffer();
 	}
 
@@ -44,6 +41,11 @@ class InputHandler {
 			this.cursorPos--;
 			this.trueLength--;
 		}
+		// enter
+		else if (charCode === 13) {
+			this.manager.sendDebug('Entered: ' + this.bufferString().slice(0, this.trueLength));
+			this.defaultHandler();
+		}
 		process.stdout.cursorTo(this.promptLength());
 		process.stdout.write(this.bufferString());
 	}
@@ -60,18 +62,12 @@ class InputHandler {
 
 	bufferString() {
 		let tempBuffer = this.buffer.slice();
-		/*
-		if (this.cursorPos < this.trueLength) {
-			tempBuffer[this.cursorPos] = '\u001b[1m' + tempBuffer[this.cursorPos] + '\u001b[0m';
-		} else {
-			tempBuffer[this.cursorPos] = '…';
-		}
-		*/
 		tempBuffer[this.cursorPos] = '…';
 		return tempBuffer.join('');
 	}
 
-	defaultHandler(text) {
+	defaultHandler() {
+		const text = this.bufferString().slice(0, this.trueLength);
 		this.resetBuffer();
 		if (!this.manager.ready) {
 			this.manager.sendDebug('Not ready yet, please wait a little!');
