@@ -4,6 +4,7 @@
   "description": "Steam chat for command line",
   "main": "./lib/index.js",
   "dependencies": {
+    "node-tput": "0.0.5",
     "steam": "^1.4.0"
   },
   "devDependencies": {},
@@ -18,8 +19,8 @@
     "steam",
     "steam-chat",
     "chat",
-	"steam chat",
-	"steamchat"
+    "steam chat",
+    "steamchat"
   ],
   "author": "rei2hu",
   "license": "ISC",
