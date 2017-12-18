@@ -7,7 +7,7 @@ const sc = new SteamChat(username, password,
 	{
 	// account options
 		// reconnect on disconnects?
-		autoreconnect: true,
+		autoreconnect: false,
 		// your sentry file's directory
 		sentryFileDir: './',
 		// the auth code sent to your email
