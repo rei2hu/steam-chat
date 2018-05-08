@@ -4,8 +4,10 @@
   "description": "Steam chat for command line",
   "main": "./lib/index.js",
   "dependencies": {
-    "node-tput": "0.0.5",
     "steam": "^1.4.0"
+  },
+  peerDependencies: {
+    node-tput: 0.0.5
   },
   "devDependencies": {},
   "scripts": {
