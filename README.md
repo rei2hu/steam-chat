@@ -7,6 +7,9 @@ begin to draw the UI properly.
 
 ![sample image](https://i.imgur.com/FIshw7u.png)
 
+## Other things
+As of node v10.0.0, `node-tput` cannot be compiled prpperly so it has been moved to a peer dependency. 
+
 ### Features
 - Chat with your online friends
 - Shows unread message notifications as in there is an asterisk in the tab with unread messages.
