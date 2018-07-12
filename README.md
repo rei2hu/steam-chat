@@ -8,7 +8,15 @@ begin to draw the UI properly.
 ![sample image](https://i.imgur.com/FIshw7u.png)
 
 ## Other things
-As of node v10.0.0, `node-tput` cannot be compiled prpperly so it has been moved to a peer dependency. 
+* As of node v10.0.0, `node-tput` cannot be compiled prpperly so it has been moved to a peer dependency. 
+
+* You might see socket timed out a lot as of 2018 July 12. That's because the server list of a module I'm using
+seems to be outdated. I took the liberty of looking at some network traffic and figuring out a new IP. You can fix
+it yourself easily by going to around line 30 in `node_modules/steam/lib/steam_client.js` and adding/modifying
+that line to be
+```
+server = {host: "155.133.254.133", port: "27018"}
+```
 
 ### Features
 - Chat with your online friends
