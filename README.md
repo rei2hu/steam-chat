@@ -8,7 +8,7 @@ begin to draw the UI properly.
 ![sample image](https://i.imgur.com/FIshw7u.png)
 
 ## Other things
-As of node v10.0.0, `node-tput` cannot be compiled prpperly so it has been moved to a peer dependency. 
+* As of node v10.0.0, `node-tput` cannot be compiled properly so it has been moved to a peer dependency. 
 
 ### Features
 - Chat with your online friends
@@ -26,4 +26,4 @@ As of node v10.0.0, `node-tput` cannot be compiled prpperly so it has been moved
 - ~~Refactoring the ugly draw UI code~~
 - ~~Saving chat history~~
 - Custom input handling
-- Custom 'window; formatting
+- Custom 'window' formatting

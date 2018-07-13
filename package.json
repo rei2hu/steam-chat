@@ -6,8 +6,8 @@
   "dependencies": {
     "steam": "^1.4.0"
   },
-  peerDependencies: {
-    node-tput: "0.0.5"
+  "peerDependencies": {
+    "node-tput": "0.0.5"
   },
   "devDependencies": {},
   "scripts": {
