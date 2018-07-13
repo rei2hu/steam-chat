@@ -4,7 +4,7 @@ want to chat but also don't want to use web browser steam for some reason.
 
 Just install and run with `node example.js`.
 
-Debug window with friendlist minimized           | Talking with someone with firiendlist open
+Debug window with friendlist minimized           | Talking with someone with friendlist open
 :-----------------------------------------------:|:-----------------------------------------------:
 ![sample image](https://i.imgur.com/DKRPe7T.png) |![another image](https://i.imgur.com/T5dVrpn.png)
 
