@@ -2,7 +2,12 @@
 Steam chat for shell/terminal/command line for people who don't want to install steam but still
 want to chat but also don't want to use web browser steam for some reason.
 
-Just install and run with `node example.js`.
+## Usage
+1. Clone the repository
+2. Create a file `auth.json` with your username and password in it e.g. `{"username":"me","password":"hunter2"}`
+3. Try running the example via `node example.js` - you might get a STEAM GUARD, CHECK EMAIL error
+4. Take the code from the Steam email you should receive and add it to `auth.json` e.g. `{...,"auth":"code"}`
+5. Run the example file again and you should be logged in
 
 Debug window with friendlist minimized           | Talking with someone with friendlist open
 :-----------------------------------------------:|:-----------------------------------------------:
@@ -25,4 +30,3 @@ are kind of unstable so it might have to try connecting a lot.
 ### Planned
 - ~~Refactoring the ugly draw UI code~~
 - ~~Saving chat history~~
-- Custom input handling (well just modify the script yourself)
